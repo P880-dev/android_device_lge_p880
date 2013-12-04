@@ -80,7 +80,7 @@ public class X3RIL extends RIL implements CommandsInterface {
     }
 
     @Override
-    protected void
+    protected Parcel
     processUnsolicited (Parcel p) {
         Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
