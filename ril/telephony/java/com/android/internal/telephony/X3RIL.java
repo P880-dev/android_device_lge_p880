@@ -98,19 +98,18 @@ public class X3RIL extends RIL implements CommandsInterface {
                 p.setDataPosition(dataPosition);
 
                 // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p);
-                return;
+                return super.processSolicited(p);
         }
         switch(response) {
             case RIL_UNSOL_RESPONSE_RADIO_STATE_CHANGED:
                 /* has bonus radio state int */
                 RadioState newState = getRadioStateFromInt(p.readInt());
                 p.setDataPosition(dataPosition);
-                super.processUnsolicited(p);
+                return super.processSolicited(p);
                 if (RadioState.RADIO_ON == newState) {
                     setNetworkSelectionModeAutomatic(null);
                 }
-                return;
+                return null;
             case RIL_UNSOL_LGE_RESTART_RILD:
                 restartRild();
                 break;
@@ -168,7 +167,7 @@ public class X3RIL extends RIL implements CommandsInterface {
             p.setDataPosition(dataPosition);
 
             // Forward responses that we are not overriding to the super class
-            super.processSolicited(p);
+            return super.processSolicited(p);
         }
 
 
