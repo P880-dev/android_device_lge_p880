@@ -29,3 +29,7 @@ ro.zygote.disable_gl_preload=true
 
 # Disable Strictmode no matter what
 persist.sys.strictmode.disable=1
+
+# Disable Hw Overlay to force GPU rendering graphics
+debug.sf.hw=1 
+debug.composition.type=gpu
