@@ -1,6 +1,16 @@
 [
- {
-   "repository": "lge-kernel-p880",
-   "target_path": "kernel/lge/p880"
- }
+  {
+    "remote": "github",
+    "account": "P880-dev",
+    "repository": "android_kernel_lge_x3",
+    "target_path": "kernel/lge/x3",
+    "revision": "cm-11.0"
+  },
+  {
+    "remote": "github",
+    "account": "P880-dev",
+    "repository": "proprietary_vendor_lge",
+    "target_path": "vendor/lge",
+    "revision": "cm-11.0"
+  }
 ]

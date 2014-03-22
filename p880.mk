@@ -1,9 +1,10 @@
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, build/target/product/locales_full.mk)
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
-$(call inherit-product-if-exists, vendor/lge/p880/p880-vendor.mk)
+# Use common BCM stuff
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/lge/p880/overlay
 
@@ -18,15 +19,17 @@ LOCAL_PATH := device/lge/p880
 
 ## Recovery
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
-    $(LOCAL_PATH)/prebuilt/recovery.sh:system/bin/setup-recovery
+    $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
+    $(LOCAL_PATH)/recovery/recovery.sh:system/bin/setup-recovery \
+    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
 ## Boot image
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.x3.rc:root/init.x3.rc \
-    $(LOCAL_PATH)/init.x3.usb.rc:root/init.x3.usb.rc \
-    $(LOCAL_PATH)/ueventd.x3.rc:root/ueventd.x3.rc \
-    $(LOCAL_PATH)/fstab.x3:root/fstab.x3
+    $(LOCAL_PATH)/rootdir/init.x3.rc:root/init.x3.rc \
+    $(LOCAL_PATH)/rootdir/init.x3.usb.rc:root/init.x3.usb.rc \
+    $(LOCAL_PATH)/rootdir/init.recovery.x3.rc:root/init.recovery.x3.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.x3.rc:root/ueventd.x3.rc \
+    $(LOCAL_PATH)/rootdir/fstab.x3:root/fstab.x3
 
 ## Miscellaneous configs
 PRODUCT_COPY_FILES += \
@@ -54,6 +57,7 @@ PRODUCT_COPY_FILES += \
 ## ALSA Config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf \
     $(LOCAL_PATH)/configs/asound.conf:system/etc/asound.conf \
     $(LOCAL_PATH)/configs/nvaudio_conf.xml:system/etc/nvaudio_conf.xml \
     $(LOCAL_PATH)/configs/alsa/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \
@@ -80,6 +84,7 @@ $(call inherit-product, build/target/product/full.mk)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nvcpud.xml::system/etc/permissions/nvcpud.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
@@ -89,7 +94,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
@@ -101,7 +106,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
-    com.android.future.usb.accessory
+    audio.r_submix.default \
+    com.android.future.usb.accessory \
+    libnetcmdiface
 
 # NFC packages
 PRODUCT_PACKAGES += \
@@ -119,12 +126,15 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/51selinux:system/etc/init.d/51selinux
 
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := full_p880
-PRODUCT_DEVICE := p880
-PRODUCT_MODEL := LG-P880
-PRODUCT_MANUFACTURER := LGE
+# Temporarily...
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.boot.selinux=permissive
 
-# Use common BCM stuff
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
+## Camera blob workaround
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/cam_hack/bin/videorec:system/bin/videorec \
+    $(LOCAL_PATH)/cam_hack/bin/videoplay:system/bin/videoplay \
+    $(LOCAL_PATH)/cam_hack/lib/libstagefrighthw_new.bak:system/lib/libstagefrighthw_new.bak \
+    $(LOCAL_PATH)/cam_hack/lib/libstagefrighthw_old.bak:system/lib/libstagefrighthw_old.bak	
+	
+$(call inherit-product, vendor/lge/p880/p880-vendor.mk)

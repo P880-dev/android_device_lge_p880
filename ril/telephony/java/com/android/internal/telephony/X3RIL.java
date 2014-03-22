@@ -149,7 +149,7 @@ public class X3RIL extends RIL implements CommandsInterface {
         synchronized (mRequestList) {
             for (int i = 0, s = mRequestList.size() ; i < s ; i++) {
                 RILRequest tr = mRequestList.get(i);
-                if (tr!=null && tr.mSerial == serial) {
+                if (tr != null && tr.mSerial == serial) {
                     if (error == 0 || p.dataAvail() > 0) {
                         try {switch (tr.mRequest) {
                             /* Get those we're interested in */
@@ -158,7 +158,7 @@ public class X3RIL extends RIL implements CommandsInterface {
                                 break;
                         }} catch (Throwable thr) {
                             // Exceptions here usually mean invalid RIL responses
-                            if (tr.mResult != null) {
+                            if (rr.mResult != null) {
                                 AsyncResult.forMessage(tr.mResult, null, thr);
                                 tr.mResult.sendToTarget();
                             }
@@ -176,7 +176,6 @@ public class X3RIL extends RIL implements CommandsInterface {
             // Forward responses that we are not overriding to the super class
             return super.processSolicited(p);
         }
-
 
         rr = findAndRemoveRequestFromList(serial);
 
@@ -211,7 +210,6 @@ public class X3RIL extends RIL implements CommandsInterface {
                 }
                 break;
         }
-
 
         if (rr.mResult != null) {
             AsyncResult.forMessage(rr.mResult, ret, null);

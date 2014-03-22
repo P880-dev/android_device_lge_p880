@@ -386,7 +386,7 @@
 
 
   <alsa_device name="music"
-             card_id="1"
+             card_id="-1"
              card_name="tegraaic326x"
              device_id="0">
     <pcm_config rate="48000"
@@ -477,7 +477,7 @@
   </alsa_device>
 
   <alsa_device name="voice"
-               card_id="1"
+               card_id="-1"
                card_name="tegraaic326x"
                device_id="2">
     <pcm_config rate="8000"
