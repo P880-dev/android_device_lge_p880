@@ -301,7 +301,10 @@ service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1
 
 on boot
     write /sys/class/gpio/export 61
-
+    write /sys/class/gpio/gpio61/value 0
+    write /sys/class/gpio/gpio61/direction out
+    chown gps system /sys/class/gpio/gpio61/value
+    chmod 0664 /sys/class/gpio/gpio61/value
     chown system system /sys/devices/platform/gps_gpio/poweron
     chown system system /sys/devices/platform/gps_gpio/reset
     chown system system /sys/devices/platform/gps_gpio/eclk
