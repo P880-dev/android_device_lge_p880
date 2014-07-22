@@ -88,32 +88,46 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <integer-array name="config_autoBrightnessLevels">
-        <item>10</item>
-        <item>50</item>
-        <item>100</item>
-        <item>200</item>
-        <item>400</item>
-        <item>500</item>
-        <item>800</item>
-        <item>1000</item>
-        <item>1600</item>
-        <item>3000</item>
-        <item>10000</item>
+        <item>13</item>
+        <item>26</item>
+        <item>66</item>
+        <item>82</item>
+        <item>133</item>
+        <item>166</item>
+        <item>266</item>
+        <item>300</item>
+        <item>433</item>
+        <item>466</item>
+        <item>600</item>
+        <item>650</item>
+        <item>867</item>
+        <item>900</item>
+        <item>1300</item>
+        <item>2200</item>
+        <item>6000</item>
+        <item>9000</item>
     </integer-array>
 
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>14</item> <!-- 0-10 -->
-        <item>28</item> <!-- 10-50 -->
-        <item>37</item> <!-- 50-100 -->
-        <item>51</item> <!-- 100-200 -->
-        <item>71</item> <!-- 200-400 -->
-        <item>80</item> <!-- 400-500 -->
-        <item>96</item> <!-- 500-800 -->
-        <item>108</item> <!-- 800-1000 -->
-        <item>144</item> <!-- 1000-1600 -->
-        <item>181</item> <!-- 1600-3000 -->
-        <item>254</item> <!-- 3000-10000 -->
-        <item>255</item> <!-- 10000+ -->
+        <item>75</item>
+        <item>87</item>
+        <item>101</item>
+        <item>105</item>
+        <item>112</item>
+        <item>116</item>
+        <item>127</item>
+        <item>137</item>
+        <item>149</item>
+        <item>151</item>
+        <item>154</item>
+        <item>161</item>
+        <item>169</item>
+        <item>174</item>
+        <item>176</item>
+        <item>202</item>
+        <item>221</item>
+        <item>241</item>
+        <item>255</item>
     </integer-array>
 
     <integer-array name="config_autoBrightnessButtonBacklightValues">
@@ -160,17 +174,6 @@
         <item>255</item>
     </integer-array>
 
-    <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">1</integer>
-
-    <!-- Default screen brightness setting.
-Must be in the range specified by minimum and maximum. -->
-    <integer name="config_screenBrightnessSettingDefault">87</integer>
-
-    <!-- Minimum screen brightness setting allowed by the power manager.
-The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">1</integer>
-
     <integer name="config_deviceHardwareKeys">7</integer>
 
     <!-- Enable lockscreen translucent decor by default -->
@@ -178,9 +181,6 @@ The user is forbidden from setting the brightness below this level. -->
 
     <!-- If this is true, the screen will fade off. -->
     <bool name="config_animateScreenLights">false</bool>
-
-    <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
-    <bool name="config_unplugTurnsOnScreen">true</bool>
 
     <!-- Whether WiFi display is supported by this device.
          There are many prerequisites for this feature to work correctly.
