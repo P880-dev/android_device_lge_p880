@@ -85,8 +85,6 @@
     The default represents a dual-mode smartphone -->
     <string translatable="false" name="config_wifi_p2p_device_type">1-0050F204-1</string>
 
-    <bool name="config_disableMenuKeyInLockScreen">true</bool>
-
     <bool name="config_automatic_brightness_available">true</bool>
 
     <integer-array name="config_autoBrightnessLevels">
