@@ -59,7 +59,6 @@ BOARD_EGL_CFG := device/lge/p880/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 
 # Old blobs support
-#BOARD_EGL_NEEDS_LEGACY_FB := true # either this or SKIP_FIRST_DEQUEUE is needed (preferably the latter)
 #BOARD_USE_MHEAP_SCREENSHOT := true
 #BOARD_EGL_SKIP_FIRST_DEQUEUE := true
 #BOARD_NEEDS_OLD_HWC_API := true
@@ -92,10 +91,13 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := device/lge/p880/bluetooth/vnd_bt.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/p880/bluetooth
 
+# Audio Options
+BOARD_HAVE_PRE_KITKAT_AUDIO_BLOB := true
+
 # Override healthd HAL
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.x3
 
-COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB -DNEEDS_VECTORIMPL_SYMBOLS
+COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB -DMR0_CAMERA_BLOB -DNEEDS_VECTORIMPL_SYMBOLS
 
 # Radio fixes
 BOARD_RIL_CLASS := ../../../device/lge/p880/ril/
