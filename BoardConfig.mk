@@ -15,7 +15,7 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a9
 TARGET_CPU_SMP := true
-TARGET_GCC_VERSION_EXP := 4.7
+#TARGET_GCC_VERSION_EXP := 4.7
 
 # Optimization build flags
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
