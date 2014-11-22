@@ -58,6 +58,14 @@ BOARD_USE_SKIA_LCDTEXT := true
 BOARD_EGL_CFG := device/lge/p880/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 
+COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
+
+# Audio
+BOARD_HAVE_PRE_KITKAT_AUDIO_BLOB := true
+
+# We're still using 4.4 blobs
+COMMON_GLOBAL_CFLAGS += -DPRE_LOLLIPOP_BLOBS
+
 # Old blobs support
 #BOARD_EGL_NEEDS_LEGACY_FB := true # either this or SKIP_FIRST_DEQUEUE is needed (preferably the latter)
 #BOARD_USE_MHEAP_SCREENSHOT := true

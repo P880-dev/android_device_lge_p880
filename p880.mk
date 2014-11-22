@@ -56,6 +56,9 @@ PRODUCT_COPY_FILES += \
 
 ## Audio config
 PRODUCT_COPY_FILES += \
+	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf \
     $(LOCAL_PATH)/configs/asound.conf:system/etc/asound.conf \
@@ -100,6 +103,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     $(LOCAL_PATH)/configs/nvcpud.xml::system/etc/permissions/nvcpud.xml
+
+# Audio
+PRODUCT_PACKAGES += \
+    audio.usb.default \
+    audio.a2dp.default \
+    audio.r_submix.default \
+    libaudioutils \
+    com.android.future.usb.accessory
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.use-awesome=true
+
 
 # Charger mode
 PRODUCT_PACKAGES += \
