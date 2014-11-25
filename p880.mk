@@ -106,6 +106,8 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    audio.primary.tegra \
+    audio_policy.tegra.so \
     audio.usb.default \
     audio.a2dp.default \
     audio.r_submix.default \
