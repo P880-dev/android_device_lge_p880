@@ -60,11 +60,15 @@ USE_OPENGL_RENDERER := true
 
 COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 
+MALLOC_IMPL := dlmalloc
+BOARD_USES_LEGACY_MMAP := true
+
 # Audio
 BOARD_HAVE_PRE_KITKAT_AUDIO_BLOB := true
 
 # We're still using 4.4 blobs
 COMMON_GLOBAL_CFLAGS += -DPRE_LOLLIPOP_BLOBS
+COMMON_GLOBAL_CFLAGS += -DSK_SUPPORT_LEGACY_DECODEFILE
 
 # Old blobs support
 #BOARD_EGL_NEEDS_LEGACY_FB := true # either this or SKIP_FIRST_DEQUEUE is needed (preferably the latter)
@@ -116,6 +120,7 @@ BOARD_BATTERY_DEVICE_NAME := battery
 
 # Skip droiddoc build to save build time
 BOARD_SKIP_ANDROID_DOC_BUILD := true
+DISABLE_DROIDDOC := true
 
 ifeq ($(HAVE_SELINUX),true)
 
