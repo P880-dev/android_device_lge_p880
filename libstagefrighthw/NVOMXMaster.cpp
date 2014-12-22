@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "NVOMXMaster"
 #include <utils/Log.h>
 
@@ -46,8 +46,11 @@ NVOMXMaster::~NVOMXMaster() {
 }
 
 void NVOMXMaster::addVendorPlugin() {
+    ALOGV("About to initialize libnvomx.so");
     addPlugin(new NVOMXPlugin("libnvomx.so"));
-    addPlugin(new NVOMXPlugin("libnvomx_so"));
+
+	ALOGV("Skipping libnvomx_so");
+//    addPlugin(new NVOMXPlugin("libnvomx_so"));
 }
 
 void NVOMXMaster::addPlugin(OMXPluginBase *plugin) {
@@ -70,6 +73,7 @@ void NVOMXMaster::addPlugin(OMXPluginBase *plugin) {
             continue;
         }
 
+		ALOGV("Registering component of name '%s'", name8.string());
         mPluginByComponentName.add(name8, plugin);
     }
 

@@ -16,6 +16,7 @@
 
 #include "NVOMXPlugin.h"
 
+#include <cutils/log.h>
 #include <dlfcn.h>
 #include <string.h>
 
@@ -35,17 +36,25 @@ NVOMXPlugin::NVOMXPlugin(const char *filename)
       mGetRolesOfComponentHandle(NULL) {
     if (mLibHandle != NULL) {
         mInit = (InitFunc)dlsym(mLibHandle, "OMX_Init");
+        ALOGE_IF(mInit == NULL,"Unable to resolve 'OMX_Init'");
+
         mDeinit = (DeinitFunc)dlsym(mLibHandle, "OMX_Deinit");
+        ALOGE_IF(mDeinit == NULL,"Unable to resolve 'OMX_Deinit'");
 
         mComponentNameEnum =
             (ComponentNameEnumFunc)dlsym(mLibHandle, "OMX_ComponentNameEnum");
+        ALOGE_IF(mComponentNameEnum == NULL,"Unable to resolve 'mComponentNameEnum'");
 
         mGetHandle = (GetHandleFunc)dlsym(mLibHandle, "OMX_GetHandle");
+        ALOGE_IF(mGetHandle == NULL,"Unable to resolve 'mGetHandle'");
+
         mFreeHandle = (FreeHandleFunc)dlsym(mLibHandle, "OMX_FreeHandle");
+        ALOGE_IF(mFreeHandle == NULL,"Unable to resolve 'mFreeHandle'");
 
         mGetRolesOfComponentHandle =
             (GetRolesOfComponentFunc)dlsym(
                     mLibHandle, "OMX_GetRolesOfComponent");
+        ALOGE_IF(mGetRolesOfComponentHandle == NULL,"Unable to resolve 'mGetRolesOfComponentHandle'");
 
         (*mInit)();
     }
