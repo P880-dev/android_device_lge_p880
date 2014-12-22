@@ -419,8 +419,7 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
                               audio_devices_t devices,
                               audio_output_flags_t flags,
                               struct audio_config *config,
-                              struct audio_stream_out **stream_out,
-                              const char *address __unused)
+                              struct audio_stream_out **stream_out)
 {
     struct wrapper_stream_out *out;
     int ret;
@@ -431,7 +430,7 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
         return -ENOMEM;
 
     ret = WRAPPED_DEVICE_CALL(dev, open_output_stream, handle, devices, flags,
-                              config, &WRAPPED_STREAM_OUT(out), address);
+                              config, &WRAPPED_STREAM_OUT(out));
     if (ret < 0)
         goto err_open;
 
@@ -483,10 +482,7 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
                              audio_io_handle_t handle,
                              audio_devices_t devices,
                              struct audio_config *config,
-                             struct audio_stream_in **stream_in,
-                             audio_input_flags_t flags __unused,
-                             const char *address __unused,
-                             audio_source_t source __unused)
+                             struct audio_stream_in **stream_in)
 {
     struct wrapper_stream_in *in;
     int ret;
@@ -498,8 +494,7 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
         return -ENOMEM;
 
     ret = WRAPPED_DEVICE_CALL(dev, open_input_stream, handle, devices,
-                              config, &WRAPPED_STREAM_IN(in), flags,
-                              address, source);
+                              config, &WRAPPED_STREAM_IN(in));
     if (ret < 0)
         goto err_open;
 
