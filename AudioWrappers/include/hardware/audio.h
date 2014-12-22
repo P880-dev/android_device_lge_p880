@@ -36,6 +36,7 @@ namespace wrapper {
 __BEGIN_DECLS
 
 /* common audio stream configuration parameters */
+#if 0
 struct audio_config {
     uint32_t sample_rate;
     audio_channel_mask_t channel_mask;
@@ -43,6 +44,7 @@ struct audio_config {
 };
 
 typedef struct audio_config audio_config_t;
+#endif
 #ifdef QCOM_HARDWARE
 typedef struct buf_info;
 #endif
