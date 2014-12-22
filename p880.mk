@@ -59,6 +59,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf \
     $(LOCAL_PATH)/configs/asound.conf:system/etc/asound.conf \
@@ -111,8 +112,7 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.a2dp.default \
     audio.r_submix.default \
-    libaudioutils \
-    com.android.future.usb.accessory
+    libaudioutils
 
 PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.use-awesome=true
@@ -146,6 +146,11 @@ PRODUCT_PACKAGES += \
     fsck.f2fs \
     fibmap.f2fs \
     f2fstat
+
+# General FS tools
+PRODUCT_PACKAGES += \
+    e2fsck \
+    setup_fs
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/init.rawip:system/bin/init.rawip \
