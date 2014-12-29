@@ -63,6 +63,7 @@ camera_module_t HAL_MODULE_INFO_SYM = {
     get_camera_info: camera_get_camera_info,
     set_callbacks: NULL,
     get_vendor_tag_ops: NULL,
+    open_legacy: NULL,
     reserved: {0},
 };
 
