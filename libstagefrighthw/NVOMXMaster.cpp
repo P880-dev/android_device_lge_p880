@@ -49,8 +49,8 @@ void NVOMXMaster::addVendorPlugin() {
     ALOGV("About to initialize libnvomx.so");
     addPlugin(new NVOMXPlugin("libnvomx.so"));
 
-	ALOGV("Skipping libnvomx_so");
-//    addPlugin(new NVOMXPlugin("libnvomx_so"));
+	ALOGV("About to initialize libnvomx_so");
+    addPlugin(new NVOMXPlugin("libnvomx_so"));
 }
 
 void NVOMXMaster::addPlugin(OMXPluginBase *plugin) {
