@@ -20,9 +20,9 @@
 # a new key layout file with the required keyboard configuration.
 #
 
-key 139   MENU
-key 102   HOME
-key 158   BACK
+key 139   MENU              VIRTUAL
+key 102   HOME              VIRTUAL
+key 158   BACK              VIRTUAL
 key 61    CALL
 key 62    ENDCALL
 key 116   POWER
