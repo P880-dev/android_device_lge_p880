@@ -21,9 +21,11 @@ TARGET_CPU_SMP := true
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
-TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
+ARCH_ARM_USE_NON_NEON_MEMCPY := true
 
-BOARD_KERNEL_CMDLINE := 
+BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 
@@ -38,9 +40,6 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 BOARD_HAS_LARGE_FILESYSTEM := true
 
 TARGET_RECOVERY_PRE_COMMAND := "/system/bin/setup-recovery"
-
-# F2FS filesystem
-TARGET_USERIMAGES_USE_F2FS := true
 
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/lge/x3
@@ -60,18 +59,22 @@ BOARD_USE_SKIA_LCDTEXT := true
 BOARD_EGL_CFG := device/lge/p880/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 
-COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
-
 MALLOC_IMPL := dlmalloc
 BOARD_USES_LEGACY_MMAP := true
+NEED_WORKAROUND_CORTEX_A9_745320 := true
+BOARD_EGL_NEEDS_FNW := true
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
+
+# Lollipop
+COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
+COMMON_GLOBAL_CFLAGS += -DREFBASE_JB_MR1_COMPAT_SYMBOLS
+COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_SET_POSITION_SYMBOL
+TARGET_NEEDS_NON_PIE_SUPPORT := true
 
 # Audio
 BOARD_HAVE_PRE_KITKAT_AUDIO_BLOB := true
+BOARD_HAVE_PRE_KITKAT_AUDIO_POLICY_BLOB := true
 TARGET_NO_ADAPTIVE_PLAYBACK := true
-
-# We're still using 4.4 blobs
-COMMON_GLOBAL_CFLAGS += -DPRE_LOLLIPOP_BLOBS
-COMMON_GLOBAL_CFLAGS += -DSK_SUPPORT_LEGACY_DECODEFILE
 
 # Old blobs support
 #COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_SET_POSITION_SYMBOL
@@ -126,28 +129,42 @@ BOARD_BATTERY_DEVICE_NAME := battery
 BOARD_SKIP_ANDROID_DOC_BUILD := true
 DISABLE_DROIDDOC := true
 
+# Bootanimaion
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+
+# SELinux
 ifeq ($(HAVE_SELINUX),true)
 
 BOARD_SEPOLICY_DIRS += \
-    device/lge/p880/sepolicy
+    device/lge/p880/sepolicies
 
 BOARD_SEPOLICY_UNION += \
     file_contexts \
     genfs_contexts \
-    app.te \
+    service_contexts \
+    bluetooth.te \
+    device.te \
+    domain.te \
     drmserver.te \
     init_shell.te \
     file.te \
+    gpsd.te \
+    keystore.te \
+    lmkd.te \
+    mediaserver.te \
+    recovery.te \
     rild.te \
     sensors_config.te \
-    shell.te \
     surfaceflinger.te \
-    system.te \
-    zygote.te
+    system_app.te \
+    system_server.te \
+    ueventd.te \
+    vold.te
 
 endif
 
-#TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 BOARD_HARDWARE_CLASS := device/lge/p880/cmhw/
 
