@@ -16,7 +16,7 @@
  */
 
 #define LOG_TAG "AudioWrapper"
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 
 #if 0
 #include <errno.h>
@@ -290,7 +290,8 @@ static int in_set_parameters(struct audio_stream *stream, const char *kvpairs)
     free(fixed_kvpairs);
     return ret;
 #else
-    RETURN_WRAPPED_STREAM_OUT_COMMON_CALL(stream, set_parameters, kvpairs);
+    ALOGI("%s: kvpairs: %s", __FUNCTION__, kvpairs);
+    RETURN_WRAPPED_STREAM_IN_COMMON_CALL(stream, set_parameters, kvpairs);
 #endif
 }
 
@@ -304,13 +305,16 @@ static char * in_get_parameters(const struct audio_stream *stream,
     free(kvpairs);
     return fixed_kvpairs;
 #else
-    RETURN_WRAPPED_STREAM_OUT_COMMON_CALL(stream, get_parameters, keys);
+    ALOGI("%s: keys: %s", __FUNCTION__, keys);
+    RETURN_WRAPPED_STREAM_IN_COMMON_CALL(stream, get_parameters, keys);
 #endif
 }
 
 static int in_add_audio_effect(const struct audio_stream *stream, effect_handle_t effect)
 {
-    RETURN_WRAPPED_STREAM_IN_COMMON_CALL(stream, add_audio_effect, effect);
+    ALOGW("%s: stream: %d   effect: %d ; %s", __FUNCTION__, stream, effect, effect);
+    //RETURN_WRAPPED_STREAM_IN_COMMON_CALL(stream, add_audio_effect, effect);
+    return 0;
 }
 
 static int in_remove_audio_effect(const struct audio_stream *stream, effect_handle_t effect)
