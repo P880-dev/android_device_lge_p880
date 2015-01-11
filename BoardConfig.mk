@@ -67,6 +67,7 @@ BOARD_EGL_NEEDS_FNW := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 
 # Lollipop
+COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_MEMORY_DEALER_CONSTRUCTOR_SYMBOL
 COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 COMMON_GLOBAL_CFLAGS += -DREFBASE_JB_MR1_COMPAT_SYMBOLS
 COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_SET_POSITION_SYMBOL
@@ -143,6 +144,7 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_SEPOLICY_UNION += \
     file_contexts \
     genfs_contexts \
+    property_contexts \
     service_contexts \
     bluetooth.te \
     device.te \
@@ -154,6 +156,7 @@ BOARD_SEPOLICY_UNION += \
     keystore.te \
     lmkd.te \
     mediaserver.te \
+    platform_app.te \
     recovery.te \
     rild.te \
     sensors_config.te \
