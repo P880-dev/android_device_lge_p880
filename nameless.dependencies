@@ -1,20 +1,26 @@
 [
- {
-   "remote":      "github",
-   "repository":  "NamelessRom/android_kernel_lge_p880",
-   "target_path": "kernel/lge/x3",
-   "branch":      "android-4.4"
- }
- {
-   "remote":      "github",
-   "repository":  "CrazyWeasel/proprietary_vendor_lge",
-   "target_path": "vendor/lge",
-   "revision":    "n-2.0"
- }
- {
-   "remote":      "aosp",
-   "repository":  "platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7",
-   "target_path": "prebuilts/gcc/linux-x86/arm/arm-eabi-4.7",
-   "revision":    "master"
- } 
+    {
+        "remote":      "github",
+        "repository":  "P880-dev/android_device_lge_p880",
+        "target_path": "device/lge/p880",
+        "revision":    "n-2.0"
+    },
+    {
+        "remote":      "github",
+        "repository":  "P880-dev/android_kernel_lge_x3",
+        "target_path": "kernel/lge/x3",
+        "revision":    "n-2.0"
+    },
+    {
+        "remote":      "github",
+        "repository":  "CrazyWeasel/proprietary_vendor_lge",
+        "target_path": "vendor/lge",
+        "revision":    "n-2.0"
+    },
+    {
+        "remote":      "aosp",
+        "repository":  "platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7",
+        "target_path": "prebuilts/gcc/linux-x86/arm/arm-eabi-4.7",
+        "revision":    "master"
+    }
 ]
