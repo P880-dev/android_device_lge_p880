@@ -43,6 +43,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/lge/x3
 TARGET_KERNEL_CONFIG := cyanogenmod_x3_defconfig
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro-4.7-13.04/bin/arm-linux-gnueabihf-
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
