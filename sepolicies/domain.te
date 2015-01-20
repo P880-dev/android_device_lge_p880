@@ -37,3 +37,4 @@ allow nvcpud self:process execmem;
 # Misc
 allow kernel fuse:dir search;
 allow netd kernel:system module_request;
+allow sysinit calibration_data_file:dir getattr;

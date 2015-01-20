@@ -1,0 +1,2 @@
+allow init lgsecclk_device:file execute_no_trans;
+allow init net_radio_prop:property_service set;
