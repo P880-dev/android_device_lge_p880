@@ -13,7 +13,6 @@ import android.telephony.PhoneNumberUtils;
 
 public class X3RIL extends RIL implements CommandsInterface {
     private boolean sentHwBootstrap = false;
-    private boolean sentAtReady = false;
 
     public X3RIL(Context context, int networkMode, int cdmaSubscription, Integer instanceId) {
         this(context, networkMode, cdmaSubscription);
@@ -39,7 +38,7 @@ public class X3RIL extends RIL implements CommandsInterface {
         riljLog("X3RIL: LGE COMMAND " + (command) + " sendt");
     }
     
-/*    protected void
+    protected void
     setSpeechCodec(Object oldret) {
         if (oldret == null) {
             riljLog("ERROR: LGE_SELECTED_SPEECH_CODEC is NULL");
@@ -58,7 +57,7 @@ public class X3RIL extends RIL implements CommandsInterface {
 
         SelectedSpeechCodecIntent.putExtra("SelectedSpeechCodec", SelectedSpeechCodecNumber);
         mContext.sendBroadcast(SelectedSpeechCodecIntent);
-    }*/
+    }
 
     @Override
     public void
@@ -109,11 +108,11 @@ public class X3RIL extends RIL implements CommandsInterface {
     public void
     getIMEI(Message result) {
         //Send command 0 when radio state is on
-        if (!sentAtReady) {
-            lgeSendCommand(0);
-            x3Sleep(100); //Test working ok without on my device.
-            sentAtReady = true;
+        if (!sentHwBootstrap) {
+            lgeSendCommand(1);
         }
+        lgeSendCommand(0);
+        x3Sleep(10); //Test working ok without on my device.
         
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_GET_IMEI, result);
 
@@ -189,7 +188,6 @@ public class X3RIL extends RIL implements CommandsInterface {
                     setNetworkSelectionModeAutomatic(null);
                 } else if (RadioState.RADIO_OFF == newState) {
                     sentHwBootstrap = false;
-                    sentAtReady = false;
                 }
                 return;
             case RIL_UNSOL_LGE_FACTORY_READY:
@@ -216,8 +214,7 @@ public class X3RIL extends RIL implements CommandsInterface {
                 break;
             case RIL_UNSOL_LGE_XCALLSTAT:
             case RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC:
-           //     setSpeechCodec(ret);
-                if (RILJ_LOGD) riljLog("sinking LGE request > " + response);
+                setSpeechCodec(ret);
                 break;
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED:
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW:
