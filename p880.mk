@@ -1,4 +1,5 @@
 $(call inherit-product, build/target/product/locales_full.mk)
+$(call inherit-product, build/target/product/full_base_telephony.mk)
 
 # The gps config appropriate for this device
 # $(call inherit-product, device/common/gps/gps_eu_supl.mk)
@@ -13,6 +14,15 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 LOCAL_PATH := device/lge/p880
+
+PRODUCT_COPY_FILES_OVERRIDES += \
+    system/etc/spn-conf.xml \
+    system/etc/audio_effects.conf
+
+PRODUCT_PACKAGES += \
+    spn-conf.xml \
+    audio_effects.conf
+
 
 ## Recovery
 PRODUCT_COPY_FILES += \
@@ -82,9 +92,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/alsa/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
     $(LOCAL_PATH)/configs/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf
 
-$(call inherit-product, build/target/product/full.mk)
-
-# Permission files
+## Permission files
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
