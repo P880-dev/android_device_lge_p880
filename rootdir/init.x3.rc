@@ -330,6 +330,9 @@ on boot
     # Torch perms
     chown system camera /sys/devices/platform/tegra-i2c.2/i2c-2/2-0053/torch
     chmod 0660 /sys/devices/platform/tegra-i2c.2/i2c-2/2-0053/torch
+    
+    #Tell lge-ril that raw-ip is ready
+    setprop net.rmmod.svc_done 1
 
 service nvcpud /system/bin/nvcpud
     class main
@@ -416,6 +419,11 @@ service rmmod_rawip /system/bin/init.rawip 0
     group radio cache inet misc
     disabled
     oneshot
+
+# restart when servicemanager is restarted
+on property:init.svc.servicemanager=restarting
+    restart lgdrm
+    restart lgsecclk
 
 on property:dev.bootcomplete=1
     write /sys/devices/platform/tegra-i2c.0/i2c-0/0-0039/run_calibration 1
