@@ -21,13 +21,15 @@ declare -A repo_url=()
 ##### Definable values
 remote_name="p880-dev_autofetch"
 
-paths="frameworks/native frameworks/base"
+paths="frameworks/native frameworks/base frameworks/opt/telephony"
 
 commit_id[frameworks_native]='8465cdba74a038bb29598cfb4f48754b83124f48 208b1fcc0df405dc15582798c4e5406ba16201a9 49beaf826eb1c4eae3fe3202ef682a5973213c2d c83b9661c0fca41a5f43473def58379c7d7ae7d7 0c880a230ef4331cc071d45b6b06a8b0572c5a8f'
-commit_id[frameworks_base]='0fe56bbeae1bbed47443f9c548766c392cb233ee'
+commit_id[frameworks_base]='45b92f41db68285e87980fafaa263511a6568705'
+commit_id[frameworks_opt_telephony]='e7490c2c565d388212d84f627fb59c2bcccf8d61'
 
 repo_url[frameworks_native]='git@bitbucket.org:laufersteppenwolf/android_frameworks_native.git'
 repo_url[frameworks_base]='git@github.com:laufersteppenwolf/android_frameworks_base-1.git'
+repo_url[frameworks_opt_telephony]='git@bitbucket.org:laufersteppenwolf/android_frameworks_opt_telephony.git'
 
 #####
 
@@ -70,7 +72,7 @@ for path in ${paths}; do
 	
 	sleep 3
 	
-	commit_path=$(echo ${path} | sed 's/\//_/')
+	commit_path=$(echo ${path} | sed 's/\//_/g')
 	
 	cd ${path}
 
@@ -78,8 +80,6 @@ for path in ${paths}; do
 		fetch ${repo_url[${commit_path}]}
 	fi
 	
-	commit_path=$(echo ${path} | sed 's/\//_/')
-
 	for commit in ${commit_id[${commit_path}]}; do
 		sleep 2
 		cherry-pick $commit
