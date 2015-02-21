@@ -23,8 +23,9 @@ remote_name="p880-dev_autofetch"
 
 paths="frameworks/native frameworks/base"
 
-commit_id[frameworks_native]='8465cdba74a038bb29598cfb4f48754b83124f48 208b1fcc0df405dc15582798c4e5406ba16201a9 49beaf826eb1c4eae3fe3202ef682a5973213c2d c83b9661c0fca41a5f43473def58379c7d7ae7d7 0c880a230ef4331cc071d45b6b06a8b0572c5a8f'
-commit_id[frameworks_base]='0fe56bbeae1bbed47443f9c548766c392cb233ee'
+#commit_id[frameworks_native]='8465cdba74a038bb29598cfb4f48754b83124f48 208b1fcc0df405dc15582798c4e5406ba16201a9 49beaf826eb1c4eae3fe3202ef682a5973213c2d c83b9661c0fca41a5f43473def58379c7d7ae7d7 0c880a230ef4331cc071d45b6b06a8b0572c5a8f 46f3af4ad1828b586f2314fc6b68fa725f90d4d0'
+commit_id[frameworks_native]='46f3af4ad1828b586f2314fc6b68fa725f90d4d0'
+commit_id[frameworks_base]='f3128d5d926201ea7fd69e99c2944542c0954ee7'
 
 repo_url[frameworks_native]='git@bitbucket.org:laufersteppenwolf/android_frameworks_native.git'
 repo_url[frameworks_base]='git@github.com:laufersteppenwolf/android_frameworks_base-1.git'
@@ -68,7 +69,7 @@ croot
 for path in ${paths}; do
 	note_enter ${path}
 	
-	sleep 3
+	sleep 1
 	
 	commit_path=$(echo ${path} | sed 's/\//_/')
 	
@@ -81,7 +82,7 @@ for path in ${paths}; do
 	commit_path=$(echo ${path} | sed 's/\//_/')
 
 	for commit in ${commit_id[${commit_path}]}; do
-		sleep 2
+#		sleep 2
 		cherry-pick $commit
 	done
 	
