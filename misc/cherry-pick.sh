@@ -21,14 +21,16 @@ declare -A repo_url=()
 ##### Definable values
 remote_name="p880-dev_autofetch"
 
-paths="frameworks/native frameworks/base"
+paths="frameworks/native frameworks/base bionic"
 
 #commit_id[frameworks_native]='8465cdba74a038bb29598cfb4f48754b83124f48 208b1fcc0df405dc15582798c4e5406ba16201a9 49beaf826eb1c4eae3fe3202ef682a5973213c2d c83b9661c0fca41a5f43473def58379c7d7ae7d7 0c880a230ef4331cc071d45b6b06a8b0572c5a8f 46f3af4ad1828b586f2314fc6b68fa725f90d4d0'
 commit_id[frameworks_native]='46f3af4ad1828b586f2314fc6b68fa725f90d4d0'
-commit_id[frameworks_base]='f3128d5d926201ea7fd69e99c2944542c0954ee7'
+commit_id[frameworks_base]='a9a3ffe5f83a509fd1cc987a7cc395b63726709a'
+commit_id[bionic]='2e8813a4304fab4256e1763a9aa395010b4ca07b'
 
 repo_url[frameworks_native]='git@bitbucket.org:laufersteppenwolf/android_frameworks_native.git'
 repo_url[frameworks_base]='git@github.com:laufersteppenwolf/android_frameworks_base-1.git'
+repo_url[bionic]='git@github.com:laufersteppenwolf/android_bionic.git'
 
 #####
 
