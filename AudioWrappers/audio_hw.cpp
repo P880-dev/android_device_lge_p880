@@ -16,7 +16,7 @@
  */
 
 #define LOG_TAG "AudioWrapper"
-#define LOG_NDEBUG 0
+//#define LOG_NDEBUG 0
 
 #if 0
 #include <errno.h>
